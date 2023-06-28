@@ -8,6 +8,7 @@ router.get('/version', (req, res) => {
     res.send('API Version: ' + API_VERSION)
 })
 router.post('/user', Controller.UserController.newUser)
+router.post('/login', Controller.UserController.login)
 
 
 

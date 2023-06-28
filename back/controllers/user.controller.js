@@ -23,6 +23,31 @@ const newUser = async (req, res, next) => {
     }
 };
 
+const login = async (req, res, next) => {
+    const user = req.body;
+    if (user.username && user.password) {
+        try {
+            await Service.UserService.login(user);
+            res.status(200).json({
+                message: 'Successful login',
+            });
+            console.log('Successful login for : ' + user.username);
+        } catch (error) {
+            res.status(401).json({
+                message: 'Login unsuccessful',
+                error: error.message,
+            });
+            console.log('Login unsuccessful for : ' + user.username);
+        }
+    } else {
+        res.status(400).json({
+            message: 'Invalid request body',
+        });
+        console.log('Invalid request body for user: ' + user.username);
+    }
+};
+
 module.exports = {
-    newUser,
+    newUser, 
+    login,
 };
