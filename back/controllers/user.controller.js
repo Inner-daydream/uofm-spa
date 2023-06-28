@@ -29,12 +29,13 @@ const login = async (req, res, next) => {
     const user = req.body;
     if (user.username && user.password) {
         try {
-            const userLog = await Service.UserService.login(user);
-            res.status(200).json({
+            const loggedInUser = await Service.UserService.login(user);
+            res.cookie('access_token', loggedInUser.token, {
+                httpOnly: true,
+                maxAge: 86400,
+                secure: process.env.NODE_ENV === 'production'
+            }).status(200).json({
                 message: 'Successful login',
-                token: userLog.token,
-                username: userLog.username,
-                email: userLog.email,
             });
             console.log('Successful login for : ' + user.username);
         } catch (error) {
@@ -52,7 +53,16 @@ const login = async (req, res, next) => {
     }
 };
 
+const getUserInfo = async (req, res, next) => {
+    const user = req.user;
+    return res.status(200).json({
+        username: user.username,
+        email: user.email,
+    });
+};
+
 module.exports = {
     newUser,
     login,
+    getUserInfo,
 };
