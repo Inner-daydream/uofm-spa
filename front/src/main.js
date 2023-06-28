@@ -26,7 +26,12 @@ const vuetify = createVuetify({
     },
 })
 
+const cookieParser = require('cookie-parser')
+
+
 const app = createApp(App)
+
+app.use(cookieParser)
 app.use(Vuelidate)
 app.use(router)
 app.use(vuetify)
