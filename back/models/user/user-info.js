@@ -14,7 +14,6 @@ const SchemaUser = new Schema({
     password: {
         required: true,
         type: String,
-        select: false,
     },
     token: {
         type: String,

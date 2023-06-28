@@ -25,11 +25,6 @@ const signup = async (user) => {
         console.log('Error occurred while saving user info to the database:', error);
         throw error
     }
-    const token = Crypto.generateToken(newUser)
-    console.log('token __is : ' + token)
-    newUser.token = token
-    console.log('New user with token:', newUser)
-    return newUser
 }
 
 const getUser = async (username) => {

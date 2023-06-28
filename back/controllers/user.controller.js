@@ -29,10 +29,12 @@ const login = async (req, res, next) => {
     const user = req.body;
     if (user.username && user.password) {
         try {
-            const token = await Service.UserService.login(user);
+            const userLog = await Service.UserService.login(user);
             res.status(200).json({
                 message: 'Successful login',
-                jwt: token,
+                token: userLog.token,
+                username: userLog.username,
+                email: userLog.email,
             });
             console.log('Successful login for : ' + user.username);
         } catch (error) {
