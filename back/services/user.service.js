@@ -25,6 +25,11 @@ const signup = async (user) => {
         console.log('Error occurred while saving user info to the database:', error);
         throw error
     }
+    const token = Crypto.generateToken(newUser)
+    console.log('token __is : ' + token)
+    newUser.token = token
+    console.log('New user with token:', newUser)
+    return newUser
 }
 
 const getUser = async (username) => {
@@ -41,15 +46,17 @@ const getUser = async (username) => {
 const login = async (user) => {
     const dbUser = await getUser(user.username)
     //try{
-        const passwordMatch = await Crypto.comparePassword(dbUser.password, user.password)
-        console.log('promise status ' + passwordMatch)
+    const passwordMatch = await Crypto.comparePassword(dbUser.password, user.password)
+    console.log('promise status ' + passwordMatch)
     //}catch (error){
-      //  throw new Error("An error has occurred during login")
+    //  throw new Error("An error has occurred during login")
     //}
-    if(passwordMatch){
-        
+    if (passwordMatch) {
+        const token = Crypto.generateToken(dbUser)
+        dbUser.token = token
+        return dbUser
     }
-    else{
+    else {
         throw new Error('Wrong password')
     }
 }

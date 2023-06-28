@@ -3,9 +3,11 @@ const newUser = async (req, res, next) => {
     const user = req.body;
     if (user.username && user.password && user.email) {
         try {
-            await Service.UserService.signup(user);
+            const token = await Service.UserService.signup(user);
+            console.log('token is : ' + token)
             res.status(201).json({
                 message: 'User created successfully',
+                token: token,
             });
             console.log('User created successfully: ' + user.username);
         } catch (error) {
@@ -27,9 +29,10 @@ const login = async (req, res, next) => {
     const user = req.body;
     if (user.username && user.password) {
         try {
-            await Service.UserService.login(user);
+            const token = await Service.UserService.login(user);
             res.status(200).json({
                 message: 'Successful login',
+                jwt: token,
             });
             console.log('Successful login for : ' + user.username);
         } catch (error) {
@@ -48,6 +51,6 @@ const login = async (req, res, next) => {
 };
 
 module.exports = {
-    newUser, 
+    newUser,
     login,
 };
