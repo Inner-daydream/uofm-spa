@@ -13,6 +13,12 @@ const hashPassword = (password) => {
     }
 }
 
+const comparePassword =  async (hashedPassword, password) => {
+    const result = await bcrypt.compare(password, hashedPassword)
+    return result;
+}
+
 module.exports = {
     hashPassword,
+    comparePassword,
 }
