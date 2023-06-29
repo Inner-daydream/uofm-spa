@@ -1,10 +1,11 @@
 const multer = require("multer");
 const path = require("path");
+const nanoid = require("nanoid");
 //Setting storage engine
 const storageEngine = multer.diskStorage({
     destination: "./images",
     filename: (req, file, cb) => {
-        cb(null, `${Date.now()}--${file.originalname}`);
+        cb(null, `${Date.now()}--${nanoid.nanoid()}.${path.extname(file.originalname)}`);
     },
 });
 

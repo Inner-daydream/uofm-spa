@@ -17,7 +17,10 @@ module.exports = router;
 
 router.post("/image", auth, upload.single("image"), (req, res) => {
     if (req.file) {
-        res.send("file uploaded successfully");
+        res.status(200).json({
+            message: 'Image uploaded successfully',
+            link: process.env.BACKEND_URL + '/' + req.file.filename,
+        });
     } else {
         res.status(400).send("Please upload a valid image");
     }
