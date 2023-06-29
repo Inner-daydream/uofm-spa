@@ -5,7 +5,6 @@ const SchemaImage = new Schema({
     name: {
         required: true,
         type: String,
-        unique: true,
     },
     description: {
         required: true,
@@ -15,6 +14,10 @@ const SchemaImage = new Schema({
         required: true,
         type: String,
     },
+    user: {
+        required: false,
+        type: String,
+    }
 })
 
 module.exports = SchemaImage;

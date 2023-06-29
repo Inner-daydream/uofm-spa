@@ -1,10 +1,10 @@
 const Service = require('../services/index.js');
 const newImage = async (req, res, next) => {
     const imageInfo = req.body;
-    if (imageInfo.name && imageInfo.description && req.file) {
+    if (imageInfo.name && imageInfo.description && req.file && req.user.username) {
         try {
             const imageLink = process.env.BACKEND_URL + '/' + req.file.filename;
-            await Service.ImageService.upload(imageInfo.name, imageInfo.description, imageLink);
+            await Service.ImageService.upload(imageInfo.name, imageInfo.description, imageLink, req.user.username);
             res.status(201).json({
                 message: 'Image uploaded successfully',
                 link: imageLink,
