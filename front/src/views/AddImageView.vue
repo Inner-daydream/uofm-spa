@@ -2,7 +2,8 @@
 import AddImage from '../components/AddImage.vue';
 </script>
 <template>
-    <h1>Add Image</h1>
+    
+    <h1 class="text-button">Add your own image</h1>
     <AddImage></AddImage>
 </template>
 
