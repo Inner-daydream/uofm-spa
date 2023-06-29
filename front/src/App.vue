@@ -2,18 +2,22 @@
 import { RouterView } from 'vue-router'
 import TopNav from './components/TopNav.vue';
 import SideNav from './components/SideNav.vue';
+import Footer from './components/Footer.vue';
+
+
 const sideNavItems = {
   "Home": {
     "title": "Home",
     "route": "/home",
-    "icon": "mdi-home"
+    "icon": "mdi-home",
+   
   },
   "About": {
-    "title": "About",
-    "route": "/about",
-    "icon": "mdi-information"
+    "title": "My Images",
+    "route": "/myImages",
+    "icon": "mdi-folder"
   },
-  "Add Image":{
+  "Add Image": {
     "title": "Add Image",
     "route": "/add_image",
     "icon": "mdi-plus-box"
@@ -22,6 +26,11 @@ const sideNavItems = {
     "title": "Gallery",
     "route": "/gallery",
     "icon": "mdi-image"
+  },
+  "Logout":{
+    "title": "Logout",
+    "route":"/logout",
+    "icon": "mdi-logout"
   }
 
 }
@@ -29,13 +38,13 @@ const topNavItems = {
   "Login": {
     "title": "Login",
     "route": "/login",
-    "icon": "mdi-login"
+    "icon": "mdi-login-variant"
   },
   "Register": {
     "title": "Register",
     "route": "/register",
     "icon": "mdi-account-plus"
-  }
+  },
 }
 </script>
 
@@ -43,13 +52,13 @@ const topNavItems = {
   <v-app>
     <TopNav :items="topNavItems"></TopNav>
     <SideNav :items="sideNavItems"></SideNav>
+
     <v-main>
       <v-container fluid>
         <router-view></router-view>
       </v-container>
     </v-main>
 
-    <v-footer app>
-    </v-footer>
+    <Footer></Footer>
   </v-app>
 </template>

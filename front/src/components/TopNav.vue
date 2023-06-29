@@ -18,7 +18,7 @@ const props = defineProps({
         <v-list-item v-for="(item, i) in items" :key="i" link :to="item.route" :title="item.title"
             :prepend-icon="item.icon">
         </v-list-item>    
-        <v-chip variant="elevated" class="text-subtitle-1" color="white">       
+        <v-chip variant="elevated" class="text-subtitle-1" background-color="#212121">       
                  Imgur Project
         </v-chip>  
     </v-app-bar>

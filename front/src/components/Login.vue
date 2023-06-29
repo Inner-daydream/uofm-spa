@@ -1,20 +1,12 @@
 <script setup>
 import { reactive, ref } from 'vue'
-import { required } from '@vuelidate/validators'
-import { useVuelidate } from '@vuelidate/core'
-
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
-
-const initialState = {
+const state = reactive({
 	username: '',
 	password: '',
 	remembered: false,
-}
-
-const state = reactive({
-	...initialState,
 })
 const showPassword = ref(false)
 
@@ -24,14 +16,6 @@ const rules = {
 }
 
 const v$ = useVuelidate(rules, state)
-
-function clear() {
-	v$.value.$reset()
-
-	for (const [key, value] of Object.entries(initialState)) {
-		state[key] = value
-	}
-}
 
 async function login() {
 	const requestOptions = {
@@ -47,14 +31,11 @@ async function login() {
 		const data = await response.json()
 		console.log(data)
 		localStorage.setItem('username', data.username)
-		clear()
 		router.push('/gallery')
 	} else {
 		console.error('An error has occured while logging in')
 	}
-
 }
-
 </script>
 
 <template>

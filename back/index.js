@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 const cors = require("cors");
 const app = express();
 const cookieParser = require("cookie-parser");
-
 require('dotenv').config();
 
 app.use(express.json());
@@ -36,6 +35,7 @@ database.once('connected', () => {
 const MAJOR_VERSION = process.env.MAJOR_VERSION
 const PORT = process.env.PORT || 3000
 app.use('/api/' + MAJOR_VERSION, routes)
+app.use(express.static(__dirname + '/images'));
 console.log('API Version: ' + MAJOR_VERSION)
 app.listen(PORT, () => {
     console.log(`Server Started at ${PORT}`)
