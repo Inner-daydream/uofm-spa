@@ -52,9 +52,7 @@ async function login() {
 	} else {
 		console.error('An error has occured while logging in')
 	}
-
 }
-
 </script>
 
 <template>

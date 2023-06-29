@@ -2,6 +2,9 @@
 import { RouterView } from 'vue-router'
 import TopNav from './components/TopNav.vue';
 import SideNav from './components/SideNav.vue';
+import Footer from './components/Footer.vue';
+
+
 const sideNavItems = {
   "Home": {
     "title": "Home",
@@ -9,11 +12,11 @@ const sideNavItems = {
     "icon": "mdi-home"
   },
   "About": {
-    "title": "About",
-    "route": "/about",
+    "title": "My Images",
+    "route": "/myImages",
     "icon": "mdi-information"
   },
-  "Add Image":{
+  "Add Image": {
     "title": "Add Image",
     "route": "/add_image",
     "icon": "mdi-plus-box"
@@ -43,13 +46,13 @@ const topNavItems = {
   <v-app>
     <TopNav :items="topNavItems"></TopNav>
     <SideNav :items="sideNavItems"></SideNav>
+
     <v-main>
       <v-container fluid>
         <router-view></router-view>
       </v-container>
     </v-main>
 
-    <v-footer app>
-    </v-footer>
+    <Footer></Footer>
   </v-app>
 </template>
