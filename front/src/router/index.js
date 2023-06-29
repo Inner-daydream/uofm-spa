@@ -16,7 +16,8 @@ const router = createRouter({
     {
       path: '/add_image',
       name: 'Add Image',
-      component: () => import('../views/AddImageView.vue')
+      component: () => import('../views/AddImageView.vue'),
+      beforeEnter: authRoute,
     },
     {
       path: '/login',
