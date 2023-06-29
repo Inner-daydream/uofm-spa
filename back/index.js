@@ -4,9 +4,16 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require("cors");
 const app = express();
+const cookieParser = require("cookie-parser");
+
+require('dotenv').config();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true
+}));
+app.use(cookieParser());
 const DB_URL = process.env.DB_URL;
 (async () => {
     try {

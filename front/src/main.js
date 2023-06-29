@@ -13,7 +13,6 @@ import '@mdi/font/css/materialdesignicons.css'
 
 import Vuelidate from 'vuelidate'
 
-console.log(import.meta.env.VITE_API_URL)
 const vuetify = createVuetify({
     components,
     directives,
@@ -30,5 +29,4 @@ const app = createApp(App)
 app.use(Vuelidate)
 app.use(router)
 app.use(vuetify)
-
 app.mount('#app')

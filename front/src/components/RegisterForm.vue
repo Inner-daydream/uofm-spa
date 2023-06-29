@@ -116,7 +116,7 @@ function setStatus(status) {
         </v-btn>
         <v-btn @click="clear">
             clear
-        </v-btn>
+        </v-btn>    
         <v-dialog width="auto" v-model="sucessDialog">
             <v-card>
                 <v-card-text>
