@@ -22,6 +22,27 @@ const newImage = async (req, res, next) => {
         });
     }
 };
+
+const getImage = async (req, res, next) => {
+    if(req.query.amount){
+        try{
+            const images = await Service.ImageService.getImage(req.query.amount);
+            res.status(200).json({
+                images: images,
+            });
+        }catch (error) {
+            res.status(404).json({
+                error: error.message,
+            });
+        }
+    } else {
+        res.status(400).json({
+            message: 'Invalid request',
+        });
+    }
+}
+
 module.exports = {
     newImage,
+    getImage,
 };
