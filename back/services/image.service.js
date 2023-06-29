@@ -1,3 +1,4 @@
+const { ImageService } = require('.');
 const Model = require('../models/index')
 const upload = async (name, description, link, user, uploadTime) => {
     const newImage = new Model.Image({
@@ -15,6 +16,15 @@ const upload = async (name, description, link, user, uploadTime) => {
     }
 
 }
+
+const getImage = async (amount) => {
+    const images = await Model.Image.find().sort({_id : -1 }).limit(amount);
+    if(!images){
+        throw new Error("No images");
+    }
+    return images;
+}
 module.exports = {
     upload,
+    getImage,
 }

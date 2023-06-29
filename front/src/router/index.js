@@ -16,7 +16,8 @@ const router = createRouter({
     {
       path: '/add_image',
       name: 'Add Image',
-      component: () => import('../views/AddImageView.vue')
+      component: () => import('../views/AddImageView.vue'),
+      beforeEnter: authRoute,
     },
     {
       path: '/login',
@@ -48,10 +49,12 @@ async function authRoute(to, from, next) {
     }
     else {
       next('/login');
+      localStorage.removeItem('username')
     }
   } catch (error) {
     console.log(error);
     next('/login');
+    localStorage.removeItem('username')
   }
 }
 export default router

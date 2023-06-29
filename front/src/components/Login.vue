@@ -8,14 +8,6 @@ const state = reactive({
 	password: '',
 	remembered: false,
 })
-const showPassword = ref(false)
-
-const rules = {
-	username: { required },
-	password: { required },
-}
-
-const v$ = useVuelidate(rules, state)
 
 async function login() {
 	const requestOptions = {

@@ -1,11 +1,11 @@
 export const personData = {
 	"mehdi":{
 		"name": "Mehdi",
-		"url": "https://picsum.photos/500/300?image=15"
+		"url": "https://cdn.discordapp.com/attachments/1120426164335419435/1124065529607491705/IMG_7006.jpg"
 	},
 	"arouna":{
 		"name": "Arouna",
-		"url": "https://picsum.photos/500/300?image=20"
+		"url": "https://cdn.discordapp.com/attachments/1116499326370316380/1124064992170356826/IMG_4358.jpg"
 	},
 	"lucas":{
 		"name": "Lucas",

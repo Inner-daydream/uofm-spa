@@ -15,4 +15,6 @@ router.get('/user/info', auth, Controller.UserController.getUserInfo)
 
 module.exports = router;
 
+
 router.post("/image", auth, upload.single("image"), Controller.ImageController.newImage)
+router.get("/image", auth, Controller.ImageController.getImage)
