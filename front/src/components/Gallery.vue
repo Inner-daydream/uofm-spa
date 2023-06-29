@@ -38,13 +38,25 @@ imageAmount.value = 10
     <v-slider v-model="imageAmount" :min="0" :max="30" :step="1" thumb-label></v-slider>
     <v-row>
         <v-col v-for="image in images" :key="_id" class="d-flex child-flex" cols="4">
-            <v-img :src="image.link" aspect-ratio="1" cover class="bg-grey-lighten-2">
+            <!-- <v-img :src="image.link" aspect-ratio="1" cover class="bg-grey-lighten-2">
                 <template v-slot:placeholder>
                     <v-row class="fill-height ma-0" align="center" justify="center">
                         <v-progress-circular indeterminate color="grey-lighten-5"></v-progress-circular>
                     </v-row>
                 </template>
-            </v-img>
+            </v-img> -->
+            <v-card class="mx-auto">
+                <v-img class="align-end text-black" aspect-ratio="1" :src="image.link" cover>
+
+                </v-img>
+                <v-card-title class="ma-0 pb-0">{{ image.name }}</v-card-title>
+                <v-card-subtitle class="ma-0">
+                    author: {{ image.user }}
+                </v-card-subtitle>
+                <v-card-text>
+                    {{ image.description }}
+                </v-card-text>
+            </v-card>
         </v-col>
     </v-row>
 </template>
