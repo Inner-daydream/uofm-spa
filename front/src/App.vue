@@ -13,11 +13,17 @@ const sideNavItems = {
     "route": "/about",
     "icon": "mdi-information"
   },
+  "Add Image":{
+    "title": "Add Image",
+    "route": "/add_image",
+    "icon": "mdi-plus-box"
+  },
   "Gallery": {
     "title": "Gallery",
     "route": "/gallery",
     "icon": "mdi-image"
   }
+
 }
 const topNavItems = {
   "Login": {

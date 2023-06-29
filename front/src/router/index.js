@@ -12,6 +12,11 @@ const router = createRouter({
       name: 'Register',
       component: () => import('../views/RegisterView.vue')
     },
+    {
+      path: '/add_image',
+      name: 'Add Image',
+      component: () => import('../views/AddImageView.vue')
+    },
   ]
 })
 
