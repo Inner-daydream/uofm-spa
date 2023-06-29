@@ -49,10 +49,12 @@ async function authRoute(to, from, next) {
     }
     else {
       next('/login');
+      localStorage.removeItem('username')
     }
   } catch (error) {
     console.log(error);
     next('/login');
+    localStorage.removeItem('username')
   }
 }
 export default router
