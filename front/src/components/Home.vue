@@ -6,15 +6,15 @@ import { personData } from "../groupPerson.js"
 	<div>
 		<h1>Group</h1>
 
-		<v-row justify="center">
+		<v-row justify="center" class="d-flex">
 			<v-col cols="6">
 				<v-card>
-					<v-img src="../assets/images/esiea.png" height="300px"></v-img>
+					<v-img src="https://cdn.discordapp.com/attachments/1063499443346878472/1124074589916508210/esiea.png" height="300px"></v-img>
 				</v-card>
 			</v-col>
 			<v-col cols="6">
 				<v-card>
-					<v-img src="../assets/images/umich-logo.jpg" height="300px"></v-img>
+					<v-img src="https://cdn.discordapp.com/attachments/1063499443346878472/1124074590193324122/umich-logo.jpg" height="300px"></v-img>
 				</v-card>
 			</v-col>
 		</v-row>
