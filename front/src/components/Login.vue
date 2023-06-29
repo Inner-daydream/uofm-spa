@@ -58,8 +58,8 @@ async function login() {
 </script>
 
 <template>
-	<div class="flex-card">
-		<v-card class="ma-auto" title="Login" max-width="500" density="compact">
+	<div class="flex-card" >
+		<v-card class="ma-auto" title="Login" max-width="500" density="compact" variant="elevated">
 			<v-form validate-on="submit">
 				<v-row>
 					<v-col cols="12">
