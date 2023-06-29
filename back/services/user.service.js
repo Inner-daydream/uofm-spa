@@ -1,4 +1,3 @@
-const e = require('express')
 const Model = require('../models/index')
 const Crypto = require('../utils/crypto')
 

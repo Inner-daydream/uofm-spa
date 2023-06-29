@@ -1,5 +1,6 @@
 const express = require('express');
 const auth = require('../middleware/auth')
+const upload = require('../middleware/upload')
 const router = express.Router()
 const Controller = require('../controllers/index')
 
@@ -13,3 +14,11 @@ router.get('/user/info', auth, Controller.UserController.getUserInfo)
 
 
 module.exports = router;
+
+router.post("/image", auth, upload.single("image"), (req, res) => {
+    if (req.file) {
+        res.send("file uploaded successfully");
+    } else {
+        res.status(400).send("Please upload a valid image");
+    }
+});
