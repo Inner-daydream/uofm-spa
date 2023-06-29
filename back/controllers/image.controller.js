@@ -3,8 +3,9 @@ const newImage = async (req, res, next) => {
     const imageInfo = req.body;
     if (imageInfo.name && imageInfo.description && req.file && req.user.username) {
         try {
+            const uploadTime = Date.now()
             const imageLink = process.env.BACKEND_URL + '/' + req.file.filename;
-            await Service.ImageService.upload(imageInfo.name, imageInfo.description, imageLink, req.user.username);
+            await Service.ImageService.upload(imageInfo.name, imageInfo.description, imageLink, req.user.username, uploadTime);
             res.status(201).json({
                 message: 'Image uploaded successfully',
                 link: imageLink,

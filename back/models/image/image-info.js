@@ -17,7 +17,11 @@ const SchemaImage = new Schema({
     user: {
         required: false,
         type: String,
-    }
+    },
+    uploadTime: {
+        required: true,
+        type: Date,
+    },
 })
 
 module.exports = SchemaImage;
