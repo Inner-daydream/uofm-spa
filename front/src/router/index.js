@@ -5,6 +5,7 @@ const router = createRouter({
     {
       path: '/gallery',
       name: 'GalleryView',
+      beforeEnter: authRoute,
       component: () => import('../views/GalleryView.vue')
     },
     {
@@ -15,9 +16,27 @@ const router = createRouter({
     {
       path: '/login',
       name: 'Login',
-      component: () => import ('../views/LoginView.vue')
+      component: () => import('../views/LoginView.vue')
     }
   ]
 })
 
+async function authRoute(to, from, next) {
+  const requestOptions = {
+    method: "GET",
+    credentials: "include",
+  };
+  try {
+    const response = await fetch(import.meta.env.VITE_API_URL + "/user/info", requestOptions)
+    if (response.ok) {
+      next();
+    }
+    else {
+      next('/login');
+    }
+  } catch (error) {
+    console.log(error);
+    next('/login');
+  }
+}
 export default router

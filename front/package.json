@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "vite",
+    "https": "vite -https",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "cert": "rm -rf .certs && mkdir -p .certs && mkcert -key-file ./.certs/key.pem -cert-file ./.certs/cert.pem 'vue.localhost'"
   },
   "dependencies": {
     "@mdi/font": "^7.2.96",

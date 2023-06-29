@@ -34,32 +34,23 @@ function clear() {
 }
 
 async function login() {
-
-	console.log("login")
-
 	const requestOptions = {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify({ ...state })
+		body: JSON.stringify({ ...state }),
+		credentials: 'include'
 	};
 
 	const response = await fetch(import.meta.env.VITE_API_URL + "/login", requestOptions);
 
 	if (response.ok) {
-		const options = {
-			expires: new Date(Date.now() + 3 * 24 * 60 * 60),
-			httpOnly: true
-		};
-
-		response.status(200).cookie("token", token, options).json({
-			success: true,
-			token,
-			user
-		})
+		const data = await response.json()
+		console.log(data)
+		localStorage.setItem('username', data.username)
 		clear()
 		router.push('/gallery')
 	} else {
-		console.error('Error while enter loging')
+		console.error('An error has occured while logging in')
 	}
 
 }

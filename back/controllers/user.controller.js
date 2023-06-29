@@ -32,10 +32,13 @@ const login = async (req, res, next) => {
             const loggedInUser = await Service.UserService.login(user);
             res.cookie('access_token', loggedInUser.token, {
                 httpOnly: true,
-                maxAge: 86400,
-                secure: process.env.NODE_ENV === 'production'
+                // TODO: short lived token with refresh tokens
+                maxAge: 60 * 1000 * 1440,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict'
             }).status(200).json({
                 message: 'Successful login',
+                username: loggedInUser.username,
             });
             console.log('Successful login for : ' + user.username);
         } catch (error) {
