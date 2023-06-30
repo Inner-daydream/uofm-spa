@@ -7,9 +7,9 @@ import Footer from './components/Footer.vue';
 
 const sideNavItems = {
   "Home": {
-    "title": "Home",
-    "route": "/home",
-    "icon": "mdi-home",
+    "title": "About Us",
+    "route": "/about",
+    "icon": "mdi-information",
 
   },
   "About": {

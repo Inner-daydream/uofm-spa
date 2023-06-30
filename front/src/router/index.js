@@ -25,10 +25,9 @@ const router = createRouter({
       component: () => import('../views/LoginView.vue')
     },
     {
-      path: '/home',
-      name: 'Home',
-      component: () => import('../views/HomeView.vue'),
-      beforeEnter: authRoute,
+      path: '/about',
+      name: 'About us',
+      component: () => import('../views/AboutUsView.vue'),
     },
     {
       path: '/myImages',
