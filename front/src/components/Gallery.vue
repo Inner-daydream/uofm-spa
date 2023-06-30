@@ -13,12 +13,8 @@ async function getImages() {
     };
     try {
         const response = await fetch(import.meta.env.VITE_API_URL + "/image?amount=" + imageAmount.value, requestOptions);
-        if (response.ok) {
-            const data = await response.json()
-            return data.images
-        } else {
-            console.error('An error has occured while using image function in')
-        }
+        const data = await response.json()
+        return data.images
     } catch (error) {
         console.error('an error has occured while fetching images', error)
     }
@@ -35,16 +31,9 @@ imageAmount.value = 10
 </script>
 
 <template>
-    <v-slider v-model="imageAmount" :min="0" :max="30" :step="1" thumb-label></v-slider>
+    <v-slider v-model="imageAmount" :min="0" :max="30" :step="1" thumb-label color="secondary"></v-slider>
     <v-row>
         <v-col v-for="image in images" :key="_id" class="d-flex child-flex" cols="4">
-            <!-- <v-img :src="image.link" aspect-ratio="1" cover class="bg-grey-lighten-2">
-                <template v-slot:placeholder>
-                    <v-row class="fill-height ma-0" align="center" justify="center">
-                        <v-progress-circular indeterminate color="grey-lighten-5"></v-progress-circular>
-                    </v-row>
-                </template>
-            </v-img> -->
             <v-card class="mx-auto">
                 <v-img class="align-end text-black" aspect-ratio="1" :src="image.link" cover>
 

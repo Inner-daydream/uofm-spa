@@ -1,5 +1,5 @@
 <template>
-	<v-footer app>
+	<v-footer app color="primary">
 		<v-row justify="center" no-gutters>
 			<v-divider></v-divider>
 

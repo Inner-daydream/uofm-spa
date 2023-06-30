@@ -18,10 +18,6 @@ const SchemaImage = new Schema({
         required: false,
         type: String,
     },
-    uploadTime: {
-        required: true,
-        type: Date,
-    },
 })
 
 module.exports = SchemaImage;

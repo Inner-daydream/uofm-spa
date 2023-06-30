@@ -6,7 +6,6 @@ const router = useRouter()
 const state = reactive({
 	username: '',
 	password: '',
-	remembered: false,
 })
 
 async function login() {
@@ -23,6 +22,7 @@ async function login() {
 		const data = await response.json()
 		console.log(data)
 		localStorage.setItem('username', data.username)
+		window.dispatchEvent(new CustomEvent('login'));
 		router.push('/gallery')
 	} else {
 		console.error('An error has occured while logging in')
@@ -31,8 +31,8 @@ async function login() {
 </script>
 
 <template>
-	<div class="flex-card" >
-		<v-card class="ma-auto" title="Login" max-width="500" density="compact" variant="elevated">
+	<div class="flex-card">
+		<v-card class="ma-auto login-form pa-15" density="compact" variant="elevated">
 			<v-form validate-on="submit">
 				<v-row>
 					<v-col cols="12">
@@ -45,16 +45,17 @@ async function login() {
 
 						</v-text-field>
 					</v-col>
-
 					<v-col cols="12">
-						<v-checkbox v-model="state.remembered" label="Remember me ?"></v-checkbox>
-					</v-col>
-
-					<v-col cols="12">
-						<v-btn @click="login()" block class="mt-2" text="Login"></v-btn>
+						<v-btn @click="login()" block class="mt-2" text="Login" color="secondary"></v-btn>
 					</v-col>
 				</v-row>
 			</v-form>
 		</v-card>
 	</div>
 </template>
+
+<style scoped>
+.login-form {
+	width: clamp(300px, 75ch, 80%)
+}
+</style>

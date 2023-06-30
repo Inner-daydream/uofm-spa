@@ -2,7 +2,7 @@
 import Gallery from '../components/Gallery.vue';
 </script>
 <template>
-    <h1>My Lab2 Gallery</h1>
+    <h1>Public image gallery</h1>
     <Gallery />
 </template>
 
@@ -10,5 +10,6 @@ import Gallery from '../components/Gallery.vue';
 h1 {
     text-align: center;
     margin: 1rem;
+    color: #362580;
 }
 </style>

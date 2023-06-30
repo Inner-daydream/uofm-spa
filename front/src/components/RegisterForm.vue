@@ -3,7 +3,6 @@ import { reactive, ref } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import { email, required, minLength } from '@vuelidate/validators'
 import { watch } from 'vue';
-import { computed } from 'vue';
 
 const initialState = {
     username: '',
@@ -66,6 +65,7 @@ function clearSubmitStatus() {
     submitStatus.value = ''
 }
 async function register() {
+    setStatus('PENDING')
     if (v$.value.$invalid) {
         setStatus('ERROR')
         console.error('Invalid form')
@@ -76,10 +76,11 @@ async function register() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...state })
     };
-    setStatus('PENDING')
     const response = await fetch(import.meta.env.VITE_API_URL + "/user", requestOptions);
     if (response.ok) {
-        submitStatus.value = 'OK'
+        setTimeout(() => {
+            submitStatus.value = 'OK'
+        }, 2000)
         clear()
     } else {
         setStatus('ERROR')
@@ -92,58 +93,77 @@ function setStatus(status) {
 </script>
 
 <template>
-    <form>
-        <v-text-field v-model="state.username" :error-messages="v$.username.$errors.map(e => e.$message)" label="Username"
-            required name="username"></v-text-field>
+    <div class="flex-card">
+        <v-card class="ma-auto registration-form pa-15" density="compact" variant="elevated">
+            <form class="ma-auto">
+                <v-text-field v-model="state.username" :error-messages="v$.username.$errors.map(e => e.$message)"
+                    label="Username" required name="username"></v-text-field>
 
-        <v-text-field v-model="state.email" :error-messages="v$.email.$errors.map(e => e.$message)" label="E-mail" required
-            @input="v$.email.$touch" @blur="v$.email.$touch" name="email"></v-text-field>
+                <v-text-field v-model="state.email" :error-messages="v$.email.$errors.map(e => e.$message)" label="E-mail"
+                    required @input="v$.email.$touch" @blur="v$.email.$touch" name="email"></v-text-field>
 
 
-        <v-text-field counter v-model="state.password" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            :error-messages="v$.password.$errors.map(e => e.$message)" :type="showPassword ? 'text' : 'password'"
-            label="Password" hint="At least 8 characters" @click:append="showPassword = !showPassword" name="password"
-            @input="v$.password.$touch" @blur="v$.password.$touch"></v-text-field>
+                <v-text-field counter v-model="state.password" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                    :error-messages="v$.password.$errors.map(e => e.$message)" :type="showPassword ? 'text' : 'password'"
+                    label="Password" hint="At least 8 characters" @click:append="showPassword = !showPassword"
+                    name="password" @input="v$.password.$touch" @blur="v$.password.$touch"></v-text-field>
 
-        <v-text-field counter v-model="state.passwordConfirm" :append-icon="showPasswordConfirm ? 'mdi-eye' : 'mdi-eye-off'"
-            :error-messages="v$.passwordConfirm.$errors.map(e => e.$message)"
-            :type="showPasswordConfirm ? 'text' : 'password'" label="Confirm Password" hint="At least 8 characters"
-            @click:append="showPasswordConfirm = !showPasswordConfirm" @input="v$.passwordConfirm.$touch"
-            @blur="v$.passwordConfirm.$touch"></v-text-field>
+                <v-text-field counter v-model="state.passwordConfirm"
+                    :append-icon="showPasswordConfirm ? 'mdi-eye' : 'mdi-eye-off'"
+                    :error-messages="v$.passwordConfirm.$errors.map(e => e.$message)"
+                    :type="showPasswordConfirm ? 'text' : 'password'" label="Confirm Password" hint="At least 8 characters"
+                    @click:append="showPasswordConfirm = !showPasswordConfirm" @input="v$.passwordConfirm.$touch"
+                    @blur="v$.passwordConfirm.$touch"></v-text-field>
+                <div class="flex-evenly">
+                    <v-btn color='secondary' width='40%' @click="v$.$validate, register()"
+                        :disabled="submitStatus === 'PENDING'">
+                        submit
+                    </v-btn>
+                    <v-btn @click="clear" width="40%" color="secondary">
+                        clear
+                    </v-btn>
+                </div>
 
-        <v-btn class="me-4" @click="v$.$validate, register()" :disabled="submitStatus === 'PENDING'">
-            submit
-        </v-btn>
-        <v-btn @click="clear">
-            clear
-        </v-btn>    
-        <v-dialog width="auto" v-model="sucessDialog">
-            <v-card>
-                <v-card-text>
-                    <span class="text-h5">You have successfully registered!</span>
-                </v-card-text>
-                <v-card-actions>
-                    <v-btn color="primary" block @click="clearSubmitStatus()">Close</v-btn>
-                </v-card-actions>
-            </v-card>
-        </v-dialog>
-        <v-dialog v-model="pendingDialog" width="auto">
-            <v-card color="primary">
-                <v-card-text>
-                    Registering ...
-                    <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
-                </v-card-text>
-            </v-card>
-        </v-dialog>
-        <v-dialog v-model="errorDialog" width="auto">
-            <v-card>
-                <v-card-text>
-                    <span class="text-h5">An error has occurred</span>
-                </v-card-text>
-                <v-card-actions>
-                    <v-btn color="red" block @click="clearSubmitStatus()">Close</v-btn>
-                </v-card-actions>
-            </v-card>
-        </v-dialog>
-    </form>
+                <v-dialog width="auto" v-model="sucessDialog">
+                    <v-card>
+                        <v-card-text>
+                            <span class="text-h5">You have successfully registered!</span>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-btn color="primary" block @click="clearSubmitStatus()">Close</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+                <v-dialog v-model="pendingDialog" width="auto">
+                    <v-card color="secondary">
+                        <v-card-text>
+                            Registering ...
+                            <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+                        </v-card-text>
+                    </v-card>
+                </v-dialog>
+                <v-dialog v-model="errorDialog" width="auto">
+                    <v-card>
+                        <v-card-text>
+                            <span class="text-h5">An error has occurred</span>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-btn color="red" block @click="clearSubmitStatus()">Close</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+            </form>
+        </v-card>
+    </div>
 </template>
+
+<style scoped>
+.registration-form {
+    width: clamp(300px, 75ch, 80%)
+}
+
+.flex-evenly {
+    display: flex;
+    justify-content: space-evenly;
+}
+</style>

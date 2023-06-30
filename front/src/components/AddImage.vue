@@ -44,31 +44,43 @@ function clear() {
 </script>
 
 <template>
+    <v-card class="ma-auto image-form pa-15" density="compact" variant="elevated">
+        <v-form>
+            <v-text-field label="Name of the image" required name="name" v-model="state.name"></v-text-field>
 
-    
+            <v-text-field label="Description of the image" required image_description="image_description" name="description"
+                v-model="state.description"></v-text-field>
 
-<v-card class="ma-auto" title="Login" max-width="800" density="compact" variant="elevated">
-    <v-form>
+            <v-file-input accept="image/*" label="File input" v-model="state.file"></v-file-input>
+            <v-btn @click="submitFile" color="secondary" class="ma-auto w-75 flex-center">
+                submit
+            </v-btn>
 
-        <v-text-field label="Name of the image" required name="name" v-model="state.name"></v-text-field>
+            <v-dialog width="auto" v-model="sucessDialog" class="pa-5">
+                <v-card>
+                    <v-card-text>
+                        <p class="text-h5 mb-2">You have successfully uploaded the image! You can share it with:</p>
+                        <p style="text-align: center;"><a :href="shareLink" color="secondary" target="_blank">{{ shareLink
+                        }}</a></p>
+                    </v-card-text>
+                    <v-layout justify-center>
+                        <v-btn @click="sucessDialog = false" color="secondary"
+                            class="ma-auto mb-5 w-75 flex-center">Close</v-btn>
+                    </v-layout>
 
-        <v-text-field label="Description of the image" required image_description="image_description" name="description"
-            v-model="state.description"></v-text-field>
-
-        <v-file-input accept="image/*" label="File input" v-model="state.file"></v-file-input>
-        <v-btn @click="submitFile" color="primary">
-            submit
-        </v-btn>
-
-        <v-dialog width="auto" v-model="sucessDialog">
-            <v-card>
-                <v-card-text>
-                    <p class="text-h5">You have successfully uploaded the image! You can share it with:</p>
-                    <p><a :href="shareLink">{{ shareLink }}</a></p>
-                </v-card-text>
-                <v-btn @click="sucessDialog = false">Close</v-btn>
-            </v-card>
-        </v-dialog>
-    </v-form>
+                </v-card>
+            </v-dialog>
+        </v-form>
     </v-card>
 </template>
+
+<style scoped>
+.image-form {
+    width: clamp(300px, 75ch, 80%)
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+}
+</style>

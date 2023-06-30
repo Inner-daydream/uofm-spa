@@ -12,5 +12,6 @@ import RegisterForm from '../components/RegisterForm.vue';
 h1 {
     text-align: center;
     margin: 1rem;
+    color: #362580;
 }
 </style>

@@ -10,6 +10,7 @@ router.get('/version', (req, res) => {
 })
 router.post('/user', Controller.UserController.newUser)
 router.post('/login', Controller.UserController.login)
+router.post('/logout', Controller.UserController.logout)
 router.get('/user/info', auth, Controller.UserController.getUserInfo)
 
 
@@ -18,3 +19,5 @@ module.exports = router;
 
 router.post("/image", auth, upload.single("image"), Controller.ImageController.newImage)
 router.get("/image", auth, Controller.ImageController.getImage)
+router.get("/image/user", auth, Controller.ImageController.getUserImages)
+router.delete("/image/:id", auth, Controller.ImageController.deleteImage)

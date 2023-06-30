@@ -10,7 +10,7 @@ const sideNavItems = {
     "title": "Home",
     "route": "/home",
     "icon": "mdi-home",
-   
+
   },
   "About": {
     "title": "My Images",
@@ -27,11 +27,6 @@ const sideNavItems = {
     "route": "/gallery",
     "icon": "mdi-image"
   },
-  "Logout":{
-    "title": "Logout",
-    "route":"/logout",
-    "icon": "mdi-logout"
-  }
 
 }
 const topNavItems = {
@@ -46,6 +41,7 @@ const topNavItems = {
     "icon": "mdi-account-plus"
   },
 }
+
 </script>
 
 <template>
@@ -62,3 +58,9 @@ const topNavItems = {
     <Footer></Footer>
   </v-app>
 </template>
+
+<style scoped>
+.v-application {
+  background-color: #F7F5FF;
+}
+</style>

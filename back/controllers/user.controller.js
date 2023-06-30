@@ -56,6 +56,26 @@ const login = async (req, res, next) => {
     }
 };
 
+const logout = async (req, res, next) => {
+    try {
+        res.clearCookie('access_token', {
+            httpOnly: true,
+            maxAge: 60 * 1000 * 1440,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict'
+        }).status(200).json({
+            message: 'Successful logout',
+        });
+    } catch (error) {
+        res.status(401).json({
+            message: 'Logout unsuccessful',
+            error: error.message,
+        });
+    }
+
+
+};
+
 const getUserInfo = async (req, res, next) => {
     const user = req.user;
     return res.status(200).json({
@@ -68,4 +88,5 @@ module.exports = {
     newUser,
     login,
     getUserInfo,
+    logout,
 };

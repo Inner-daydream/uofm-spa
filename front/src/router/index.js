@@ -27,12 +27,14 @@ const router = createRouter({
     {
       path: '/home',
       name: 'Home',
-      component: () => import('../views/HomeView.vue')
+      component: () => import('../views/HomeView.vue'),
+      beforeEnter: authRoute,
     },
     {
       path: '/myImages',
       name: 'My Images',
-      component: () => import('../views/MyImageView.vue')
+      component: () => import('../views/MyImageView.vue'),
+      beforeEnter: authRoute,
     }
   ]
 })
@@ -49,12 +51,12 @@ async function authRoute(to, from, next) {
     }
     else {
       next('/login');
-      localStorage.removeItem('username')
+      window.dispatchEvent(new CustomEvent('noAuth'));
     }
   } catch (error) {
     console.log(error);
     next('/login');
-    localStorage.removeItem('username')
+    window.dispatchEvent(new CustomEvent('noAuth'));
   }
 }
 export default router
